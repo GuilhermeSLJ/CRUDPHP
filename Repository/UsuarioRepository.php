@@ -57,18 +57,38 @@ class UsuarioRepository {
 
     }
 
+    public function getUsuario(int $id): ? array{
+        $retorno = null;
+        
+        $qsl = $this->getSelectUser($id);
+        $res = $this->conn->query($qsl);
+        $usuario = $res->fetch_object();
 
 
+        if ($usuario) {
+            $retorno = $this->convertObejectToArray($usuario);
 
+        }
 
-
-
+        return $retorno;
+    } 
     
 
+    public function getUsuarios(): array{
 
+        $sql = $this->getSelectUser();
+        $res = $this->conn->query($sql);
 
+        $usuarios[];
+        while ($row = $res->fetch_object) {
+            $usuarios[] = $this->convertObjectToArray($row);
+            }
+            return $usuarios;   
+        }
+    
 
- 
+    }
+    
 }
 
 
